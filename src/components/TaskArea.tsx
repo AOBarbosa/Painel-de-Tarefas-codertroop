@@ -1,6 +1,10 @@
 import { ChangeEvent, FormEvent, useState } from 'react'
 import { Task } from './Task'
+
 import { v4 as uuidv4 } from 'uuid'
+import * as z from 'zod'
+import { zodResolver } from '@hookform/resolvers/zod'
+import { useForm } from 'react-hook-form'
 
 export interface TaskProps {
   id: string
@@ -9,7 +13,23 @@ export interface TaskProps {
   isCompleted: boolean
 }
 
+const taskFormSchema = z.object({
+  content: z
+    .string({ required_error: 'The tasks content is required' })
+    .max(144),
+  priority: z.number().int().nonnegative().lte(5),
+})
+
+type TaskFormData = z.infer<typeof taskFormSchema>
+
 export function TaskArea() {
+  const {
+    register,
+    formState: { errors },
+  } = useForm<TaskFormData>({
+    resolver: zodResolver(taskFormSchema),
+  })
+
   const [tasks, setTasks] = useState<TaskProps[]>([])
   const [newTaskContent, setNewTaskContent] = useState('')
   const [taskPriority, setTaskPriority] = useState(0)
@@ -66,13 +86,20 @@ export function TaskArea() {
       <form onSubmit={handleCreateTask} className="w-full flex flex-col gap-4">
         <div className="flex flex-row gap-2">
           <input
+            {...register('content')}
             value={newTaskContent}
             onChange={handleNewTaskContent}
             placeholder="Insira uma nova tarefa"
             className="flex h-9 w-full rounded-md border border-input bg-transparent px-3 py-1 text-sm shadow-sm transition-colors placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:cursor-not-allowed disabled:opacity-50"
           />
+          {errors.content && (
+            <span className="text-red-500 text-xs">
+              {errors.content.message}
+            </span>
+          )}
 
           <input
+            {...register('priority')}
             placeholder="Prioridade"
             type="number"
             onChange={handleNewTaskPriority}
@@ -82,6 +109,8 @@ export function TaskArea() {
 
         <button
           type="submit"
+          data-testid="add-task-button"
+          disabled={newTaskContent === ''}
           className="flex justify-center items-center cursor-pointer w-auto h-9 p-2 bg-zinc-50 text-black rounded-md hover:bg-primary/90 disabled:cursor-not-allowed disabled:opacity-50"
         >
           Adicionar
@@ -95,6 +124,7 @@ export function TaskArea() {
         {tasks.map((task) => {
           return (
             <Task
+              data-testid="task"
               key={task.id}
               id={task.id}
               content={task.content}
