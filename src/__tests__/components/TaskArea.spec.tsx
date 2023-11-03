@@ -67,4 +67,24 @@ describe('Task Page', () => {
 
     expect(newTaskTitle).not.toBeInTheDocument()
   })
+
+  it('should be able to check a task as completed', () => {
+    render(<TaskArea />)
+
+    const taskInput = screen.getByPlaceholderText('Insira uma nova tarefa')
+    const addTaskButton = screen.getByTestId('add-task-button')
+
+    fireEvent.change(taskInput, {
+      target: {
+        value: 'Nova tarefa',
+      },
+    })
+    fireEvent.click(addTaskButton)
+
+    const task = screen.getByText('Nova tarefa')
+    task.firstChild && fireEvent.click(task.firstChild)
+
+    expect(task).toBeInTheDocument()
+    expect(task).toHaveClass('line-through')
+  })
 })
