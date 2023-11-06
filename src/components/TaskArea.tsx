@@ -54,7 +54,7 @@ export function TaskArea() {
       {
         id: uuidv4(),
         content: newTaskContent,
-        priority: taskPriority,
+        priority: taskPriority !== 0 ? taskPriority : 1,
         isCompleted: false,
       },
     ])
@@ -167,36 +167,47 @@ export function TaskArea() {
         <>
           <div className="grid grid-cols-3 gap-1 md:flex md:flex-row md:items-center md:justify-center">
             <button
+              data-testid="all-tasks-filter"
               className="flex justify-center items-center text-xs md:text-sm cursor-pointer w-auto md:w-28 h-9 p-2 bg-zinc-50 text-black rounded-md hover:bg-primary/90 disabled:cursor-not-allowed disabled:opacity-50"
               onClick={() => setFilter('all')}
             >
               Todas
             </button>
+
             <button
+              data-testid="completed-tasks-filter"
               className="flex justify-center items-center text-xs md:text-sm cursor-pointer w-auto md:w-28 h-9 p-2 bg-zinc-50 text-black rounded-md hover:bg-primary/90 disabled:cursor-not-allowed disabled:opacity-50"
               onClick={() => setFilter('completed')}
             >
               Concluídas
             </button>
+
             <button
+              data-testid="incompleted-tasks-filter"
               className="flex justify-center items-center text-xs md:text-sm cursor-pointer w-auto md:w-28 h-9 p-2 bg-zinc-50 text-black rounded-md hover:bg-primary/90 disabled:cursor-not-allowed disabled:opacity-50"
               onClick={() => setFilter('incomplete')}
             >
               Não Concluídas
             </button>
+
             <button
+              data-testid="high-piority-tasks-filter"
               className="flex justify-center items-center text-xs md:text-sm cursor-pointer w-auto md:w-28 h-9 p-2 bg-zinc-50 text-black rounded-md hover:bg-primary/90 disabled:cursor-not-allowed disabled:opacity-50"
               onClick={() => setFilter('high')}
             >
               Alta
             </button>
+
             <button
+              data-testid="medium-piority-tasks-filter"
               className="flex justify-center items-center text-xs md:text-sm cursor-pointer w-auto md:w-28 h-9 p-2 bg-zinc-50 text-black rounded-md hover:bg-primary/90 disabled:cursor-not-allowed disabled:opacity-50"
               onClick={() => setFilter('medium')}
             >
               Média
             </button>
+
             <button
+              data-testid="low-piority-tasks-filter"
               className="flex justify-center items-center text-xs md:text-sm cursor-pointer w-auto md:w-28 h-9 p-2 bg-zinc-50 text-black rounded-md hover:bg-primary/90 disabled:cursor-not-allowed disabled:opacity-50"
               onClick={() => setFilter('low')}
             >
