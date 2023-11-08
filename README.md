@@ -1,17 +1,25 @@
-Esta é um aplicacao de Lista de Tarefas. 
+Esta é um aplicacao de Lista de Tarefas.
 
 # Para rodar o projeto na sua máquina
 
-Primeiro, rode o server de desenvolvimento:
+Primeiro, clone o repositorio na sua máquina
 
 ```bash
+git clone https://github.com/AOBarbosa/Painel-de-Tarefas-codertroop.git
+cd Paintel-de-Tarefas-codertroop
+```
+
+Em sguida, instale as dependencias e rode o servidor de desenvolvimento:
+
+```bash
+npm i
 npm run dev
 # ou
+yarn 
 yarn dev
 # ou
+pnpm i
 pnpm dev
-# ou
-bun dev
 ```
 
 Acesse [http://localhost:3000/tasks](http://localhost:3000/tasks) com o seu navegador e veja o resultado.
@@ -111,6 +119,18 @@ npm run test
 yarn test
 # ou
 pnpm test
-# ou
-bun test
 ```
+
+## Funcionalidades Bônus
+
+A implementação dos bO3nus 1 e 2 foram iniciadas porem nao finalizadas.
+
+### Bônus 1
+
+A autenticação do usuário ia ser feita através do Google e Github.
+
+Há uma página inical com o formulário para o usuário, porêm não esta funcional.
+
+### Bônus 2
+
+Com relação a persistência de dados ia ser utilizado um banco de dados [SQLite](https://www.sqlite.org/index.html) e a ORM [Prisma](https://www.prisma.io/). Portanto foi usado o localStorage.
