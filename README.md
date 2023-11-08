@@ -1,36 +1,116 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+Esta é um aplicacao de Lista de Tarefas. 
 
-## Getting Started
+# Para rodar o projeto na sua máquina
 
-First, run the development server:
+Primeiro, rode o server de desenvolvimento:
 
 ```bash
 npm run dev
-# or
+# ou
 yarn dev
-# or
+# ou
 pnpm dev
-# or
+# ou
 bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Acesse [http://localhost:3000/tasks](http://localhost:3000/tasks) com o seu navegador e veja o resultado.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+# Como usar o app
 
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
+## Ao iniciar você irá se deparar com a lista de tarefas vazia
 
-## Learn More
+<h1 display = "flex" align-items = "center">
+    <img alt="Preview Desktop" title="Preview Desktop" src="public/lista-empty.png" />
+</h1>
 
-To learn more about Next.js, take a look at the following resources:
+Em seguida, você pode preencher os campos com o título da tarefa e sua prioridade, respectivamente. O campo de prioridade é opcional; caso não receba nenhum valor, por padrão, receberá a prioridade 1.
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## Após adicionar algumas tarefas voce irá se deparar com uma tela semelhante a esta
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
+<h1 display = "flex" align-items = "center">
+    <img alt="Preview Desktop" title="Preview Desktop" src="public/lista-all.png" />
+</h1>
 
-## Deploy on Vercel
+Para marcar uma tarefa como concluída, basta clicar sobre o título da mesma. Para desmarcar, basta clicar novamente.
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+Para editar o título da tarefa, basta clicar no botão com o ícone de lápis.
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+Para remover alguma tarefa, basta clicar no botão com o ícone de lixeira.
+
+As tarefas são organizadas de forma decrescente de acordo com sua prioridade, de 1 a 3, sendo 3 a maior. Por padrão, o filtro que mostrará todas as tarefas está habilitado.
+
+## Filtros
+
+### Tarefas Concluídas
+
+<h1 display = "flex" align-items = "center">
+    <img alt="Preview Desktop" title="Preview Desktop" src="public/lista-completed.png" />
+</h1>
+
+Ao clicar no botao "Concluídas", apenas as tarefas marcadas iráo ser exibidas.
+
+### Tarefas Não Concluídas
+
+<h1 display = "flex" align-items = "center">
+    <img alt="Preview Desktop" title="Preview Desktop" src="public/lista-incompleted.png" />
+</h1>
+
+Ao clicar no botao "Não Concluídas", apenas as tarefas não marcadas irão ser exibidas.
+
+### Tarefas de Alta Prioridade
+
+<h1 display = "flex" align-items = "center">
+    <img alt="Preview Desktop" title="Preview Desktop" src="public/lista-high.png" />
+</h1>
+
+Ao clicar no botao "Alta", apenas as tarefas com prioridade 3 irão ser exibidas.
+
+### Tarefas de Média Prioridade
+
+<h1 display = "flex" align-items = "center">
+    <img alt="Preview Desktop" title="Preview Desktop" src="public/lista-medium.png" />
+</h1>
+
+Ao clicar no botao "Média", apenas as tarefas com prioridade 2 irão ser exibidas.
+
+### Tarefas de Baixa Prioridade
+
+<h1 display = "flex" align-items = "center">
+    <img alt="Preview Desktop" title="Preview Desktop" src="public/lista-low.png" />
+</h1>
+
+Ao clicar no botao "Baixa", apenas as tarefas com prioridade 1 irão ser exibidas.
+
+## Para o desenvolvimento deste projeto foram usadas as seguintes tecnologias
+
+- [ReactJs](https://react.dev/learn)
+- [Next.js](https://nextjs.org/docs)
+- [Tailwindcss](https://tailwindcss.com/docs/installation)
+- [Zod](https://zod.dev/)
+- [uuid](https://www.npmjs.com/package/uuid)
+- [Lucide-react](https://lucide.dev/)
+
+## Para testar a aplicação foram usadas as seguintes tecnologias
+
+- [React-testing-library](https://testing-library.com/docs/react-testing-library/intro/)
+- [Jest](https://jestjs.io/docs/getting-started)
+
+Foram desenvolvidos testes unitarios para os componentes da aplicação, onde foram testadas as seguintes funcionalidades:
+
+- Criação de tarefas
+- Listagem das tarefas
+- Remoção de tarefas
+- Filtros de exibição das tarefas
+
+### Para rodar os testes
+
+```bash
+npm run test
+# ou
+yarn test
+# ou
+pnpm test
+# ou
+bun test
+```

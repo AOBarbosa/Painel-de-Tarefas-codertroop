@@ -1,8 +1,10 @@
+'use client'
+
 import { ChangeEvent, FormEvent, useEffect, useState } from 'react'
 import { Task } from './Task'
 
 import { v4 as uuidv4 } from 'uuid'
-import * as z from 'zod'
+import { z } from 'zod'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { useForm } from 'react-hook-form'
 import { ListChecks } from 'lucide-react'
@@ -40,7 +42,7 @@ export function TaskArea() {
 
   const [tasks, setTasks] = useState<TaskProps[]>(dataLocalStorage)
   const [newTaskContent, setNewTaskContent] = useState('')
-  const [taskPriority, setTaskPriority] = useState(0)
+  const [taskPriority, setTaskPriority] = useState<number>(0)
   const [filter, setFilter] = useState('all') // Pode ser 'all', 'completed', 'incomplete', 'high', 'medium', 'low'
 
   useEffect(() => {
@@ -54,7 +56,7 @@ export function TaskArea() {
       {
         id: uuidv4(),
         content: newTaskContent,
-        priority: taskPriority !== 0 ? taskPriority : 1,
+        priority: taskPriority === 0 ? 1 : taskPriority,
         isCompleted: false,
       },
     ])
@@ -168,7 +170,7 @@ export function TaskArea() {
           <div className="grid grid-cols-3 gap-1 md:flex md:flex-row md:items-center md:justify-center">
             <button
               data-testid="all-tasks-filter"
-              className="flex justify-center items-center text-xs md:text-sm cursor-pointer w-auto md:w-28 h-9 p-2 bg-zinc-50 text-black rounded-md hover:bg-primary/90 disabled:cursor-not-allowed disabled:opacity-50"
+              className="flex justify-center items-center text-xs md:text-sm cursor-pointer w-auto md:w-28 h-9 p-2 bg-zinc-50 focus:ring-2 focus:ring-blue-500 text-black rounded-md hover:bg-primary/90 disabled:cursor-not-allowed disabled:opacity-50"
               onClick={() => setFilter('all')}
             >
               Todas
@@ -176,7 +178,7 @@ export function TaskArea() {
 
             <button
               data-testid="completed-tasks-filter"
-              className="flex justify-center items-center text-xs md:text-sm cursor-pointer w-auto md:w-28 h-9 p-2 bg-zinc-50 text-black rounded-md hover:bg-primary/90 disabled:cursor-not-allowed disabled:opacity-50"
+              className="flex justify-center items-center text-xs md:text-sm cursor-pointer w-auto md:w-28 h-9 p-2 bg-zinc-50 focus:ring-2 focus:ring-blue-500 text-black rounded-md hover:bg-primary/90 disabled:cursor-not-allowed disabled:opacity-50"
               onClick={() => setFilter('completed')}
             >
               Concluídas
@@ -184,7 +186,7 @@ export function TaskArea() {
 
             <button
               data-testid="incompleted-tasks-filter"
-              className="flex justify-center items-center text-xs md:text-sm cursor-pointer w-auto md:w-28 h-9 p-2 bg-zinc-50 text-black rounded-md hover:bg-primary/90 disabled:cursor-not-allowed disabled:opacity-50"
+              className="flex justify-center items-center text-xs md:text-sm cursor-pointer w-auto md:w-28 h-9 p-2 bg-zinc-50 focus:ring-2 focus:ring-blue-500 text-black rounded-md hover:bg-primary/90 disabled:cursor-not-allowed disabled:opacity-50"
               onClick={() => setFilter('incomplete')}
             >
               Não Concluídas
@@ -192,7 +194,7 @@ export function TaskArea() {
 
             <button
               data-testid="high-piority-tasks-filter"
-              className="flex justify-center items-center text-xs md:text-sm cursor-pointer w-auto md:w-28 h-9 p-2 bg-zinc-50 text-black rounded-md hover:bg-primary/90 disabled:cursor-not-allowed disabled:opacity-50"
+              className="flex justify-center items-center text-xs md:text-sm cursor-pointer w-auto md:w-28 h-9 p-2 bg-zinc-50 focus:ring-2 focus:ring-blue-500 text-black rounded-md hover:bg-primary/90 disabled:cursor-not-allowed disabled:opacity-50"
               onClick={() => setFilter('high')}
             >
               Alta
@@ -200,7 +202,7 @@ export function TaskArea() {
 
             <button
               data-testid="medium-piority-tasks-filter"
-              className="flex justify-center items-center text-xs md:text-sm cursor-pointer w-auto md:w-28 h-9 p-2 bg-zinc-50 text-black rounded-md hover:bg-primary/90 disabled:cursor-not-allowed disabled:opacity-50"
+              className="flex justify-center items-center text-xs md:text-sm cursor-pointer w-auto md:w-28 h-9 p-2 bg-zinc-50 focus:ring-2 focus:ring-blue-500 text-black rounded-md hover:bg-primary/90 disabled:cursor-not-allowed disabled:opacity-50"
               onClick={() => setFilter('medium')}
             >
               Média
@@ -208,7 +210,7 @@ export function TaskArea() {
 
             <button
               data-testid="low-piority-tasks-filter"
-              className="flex justify-center items-center text-xs md:text-sm cursor-pointer w-auto md:w-28 h-9 p-2 bg-zinc-50 text-black rounded-md hover:bg-primary/90 disabled:cursor-not-allowed disabled:opacity-50"
+              className="flex justify-center items-center text-xs md:text-sm cursor-pointer w-auto md:w-28 h-9 p-2 bg-zinc-50 focus:ring-2 focus:ring-blue-500 text-black rounded-md hover:bg-primary/90 disabled:cursor-not-allowed disabled:opacity-50"
               onClick={() => setFilter('low')}
             >
               Baixa
